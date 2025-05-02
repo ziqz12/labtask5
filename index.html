@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JTMK</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .social-sidebar {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 9999;
+    }
+  
+    .social-sidebar a {
+      display: block;
+      margin: 4px 0;
+      padding: 10px;
+      background: #2575FC;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 0 6px 6px 0;
+      transition: 0.3s;
+    }
+  
+    .social-sidebar a:hover {
+      background: #6A11CB;
+    }
+  
+    .section {
+      text-align: center;
+      padding: 30px 20px;
+    }
+  
+    .member-card {
+      padding: 10px;
+      background: #6A11CB;
+      margin: 10px;
+      border-radius: 12px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      color: white;
+    }
+  
+    .member-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+  
+    .project-item {
+      margin-bottom: 30px;
+      color: #333;
+    }
+  
+    .project-item img {
+      max-width: 50%;
+      border-radius: 8px;
+    }
+  
+    .custom-footer {
+      text-align: center;
+      padding: 10px;
+      background: linear-gradient(to right, #6A11CB, #2575FC);
+      color: white;
+      font-size: 14px;
+    }
+  
+    h2 {
+      color: #333;
+    }
+  
+    .small-btn {
+      max-width: 200px;
+      margin: auto;
+      font-size: 14px;
+      padding: 8px 16px;
+      background: linear-gradient(to right, #6A11CB, #2575FC);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+  
+    .small-btn:hover {
+      background: linear-gradient(to right, #2575FC, #6A11CB);
+    }
+  
+    .header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: linear-gradient(to right, #6A11CB, #2575FC);
+      color: white;
+    }
+  
+    .header-logo {
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+  
+    .header-logo img {
+      height: 28px;
+      margin-right: 10px;
+    }
+  
+    .header-nav ul {
+      display: flex;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .header-nav li a {
+      display: block;
+      background: white;
+      color: #2575FC;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid #2575FC;
+      transition: all 0.3s ease;
+    }
+  
+    .header-nav li a:hover,
+    .header-nav li a.active {
+      background: #2575FC;
+      color: white;
+    }
+  
+    .hamburger {
+      display: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+    }
+  
+    @media (max-width: 600px) {
+      .header-nav ul {
+        display: none;
+        flex-direction: column;
+        background: #2575FC;
+        position: absolute;
+        right: 10px;
+        top: 50px;
+        z-index: 999;
+        width: 150px;
+      }
+  
+      .header-nav ul.active {
+        display: flex;
+      }
+  
+      .hamburger {
+        display: block;
+      }
+    }
+  </style>
+  
+</head>
+
+<body>
+
+  <div class="social-sidebar">
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <script>
+    $(document).on("click", ".hamburger", function () {
+      $(this).siblings(".header-nav").find("ul").toggleClass("active");
+    });
+    $(document).on("click", ".header-nav a", function () {
+      if ($(window).width() <= 600) {
+        $(".header-nav ul").removeClass("active");
+      }
+    });
+    $(document).on("pageshow", function (e) {
+      let currentId = $(e.target).attr("id");
+      $(".nav-link").removeClass("active");
+      $(`.nav-link[data-id='${currentId}']`).addClass("active");
+    });
+  </script>
+
+  <!-- HOME PAGE -->
+  <div data-role="page" id="home">
+    <div data-role="header" data-position="fixed" style="background:salmon;">
+      <div class="header-flex">
+        <div class="header-logo">
+          <img src='JTMK.jpeg' alt='Logo'>
+          <span style='color:black;font-weight:bold;'>JTMK</span>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <div class="header-nav">
+          <ul>
+            <li><a href="#home" class="nav-link" data-id="home">HOME</a></li>
+            <li><a href="#about" class="nav-link" data-id="about">ABOUT</a></li>
+            <li><a href="#projects" class="nav-link" data-id="projects">PROJECTS</a></li>
+            <li><a href="#contact" class="nav-link" data-id="contact">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div role="main" class="ui-content section">
+      <h2>HEY, MY NAME IS JTMK</h2>
+      <p>JTMK is the Department of Information and Communication Technology (JTMK) offering DDT courses (Diploma in
+        Information Technology (Digital Technology)) at Seberang Perai Polytechnic (PSP).</p>
+      <a href="#projects" class="ui-btn ui-btn-b ui-shadow small-btn">View Projects</a>
+    </div>
+    <div data-role="footer" class="custom-footer" data-position="fixed">&copy; DDT4x S2 2024/2025. All rights reserved.
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div data-role="page" id="about">
+    <div data-role="header" data-position="fixed" style="background:salmon;">
+      <div class="header-flex">
+        <div class="header-logo">
+          <img src='JTMK.jpeg' alt='Logo'>
+          <span style='color:black;font-weight:bold;'>JTMK</span>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <div class="header-nav">
+          <ul>
+            <li><a href="#home" class="nav-link" data-id="home">HOME</a></li>
+            <li><a href="#about" class="nav-link" data-id="about">ABOUT</a></li>
+            <li><a href="#projects" class="nav-link" data-id="projects">PROJECTS</a></li>
+            <li><a href="#contact" class="nav-link" data-id="contact">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div role="main" class="ui-content section">
+      <h2>About Our Team</h2>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="ui-block-a member-card">
+          <img src="haziq.jpeg" alt="Member 1">
+          <h4>Haziq Hakimi</h4>
+          <p>Head of Department<br>012-3456789</p>
+        </div>
+        <div class="ui-block-b member-card">
+          <img src="chon.jpg" alt="Member 2">
+          <h4>Muhammad Hazimi</h4>
+          <p>Program Head (Software)<br>013-3456789</p>
+        </div>
+        <div class="ui-block-a member-card">
+          <img src="juan.jpg" alt="Member 3">
+          <h4>Juani Uzayr</h4>
+          <p>Program Head (Network)<br>014-3456789</p>
+        </div>
+        <div class="ui-block-b member-card">
+          <img src="aiz.jpg" alt="Member 4">
+          <h4>Zulfadzlin Aizat</h4>
+          <p>Program Head (Data)<br>015-3456789</p>
+        </div>
+      </div>
+    </div>
+    <div data-role="footer" class="custom-footer" data-position="fixed">&copy; DDT4x S2 2024/2025. All rights reserved.
+    </div>
+  </div>
+
+  <!-- PROJECTS PAGE -->
+  <div data-role="page" id="projects">
+    <div data-role="header" data-position="fixed" style="background:salmon;">
+      <div class="header-flex">
+        <div class="header-logo">
+          <img src='JTMK.jpeg' alt='Logo'>
+          <span style='color:black;font-weight:bold;'>JTMK</span>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <div class="header-nav">
+          <ul>
+            <li><a href="#home" class="nav-link" data-id="home">HOME</a></li>
+            <li><a href="#about" class="nav-link" data-id="about">ABOUT</a></li>
+            <li><a href="#projects" class="nav-link" data-id="projects">PROJECTS</a></li>
+            <li><a href="#contact" class="nav-link" data-id="contact">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div role="main" class="ui-content section">
+      <h2>Our Projects</h2>
+      <div class="project-item">
+        <h4>Smart Attendance System</h4>
+        <p>This system is to simplify the student attendance system and make the system more organized and less complex.
+        </p>
+        <img src="project.jpg" alt="Project 1">
+        <p><a href="report lt5_1126_1129_1101_1075(1).pdf" target="_blank">View Report</a></p>
+
+      </div>
+    </div>
+    <div data-role="footer" class="custom-footer" data-position="fixed">&copy; DDT4x S2 2024/2025. All rights reserved.
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div data-role="page" id="contact">
+    <div data-role="header" data-position="fixed" style="background:salmon;">
+      <div class="header-flex">
+        <div class="header-logo">
+          <img src='JTMK.jpeg' alt='Logo'>
+          <span style='color:black;font-weight:bold;'>JTMK</span>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <div class="header-nav">
+          <ul>
+            <li><a href="#home" class="nav-link" data-id="home">HOME</a></li>
+            <li><a href="#about" class="nav-link" data-id="about">ABOUT</a></li>
+            <li><a href="#projects" class="nav-link" data-id="projects">PROJECTS</a></li>
+            <li><a href="#contact" class="nav-link" data-id="contact">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div role="main" class="ui-content section">
+      <h2>Contact Us</h2>
+      <a href="tel:60105450069" class="ui-btn ui-icon-phone ui-btn-icon-left">Contact Us Through Call</a>
+      <a href="mailto:haziqhakimi447@gmail.com" class="ui-btn ui-icon-mail ui-btn-icon-left">Send An Email To Us</a>
+      <a href="https://wa.me/60105450069" target="_blank" class="ui-btn ui-icon-comment ui-btn-icon-left">Contact On Us
+        In Whatsapp</a>
+    </div>
+    <div data-role="footer" class="custom-footer" data-position="fixed">&copy; DDT4x S2 2024/2025. All rights reserved.
+    </div>
+  </div>
+
+</body>
+
+</html>
